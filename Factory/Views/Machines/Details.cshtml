@@ -10,6 +10,6 @@
 <ul>
     @foreach (RepairCert cert in Model.RepairCerts)
     {
-      <li>@Html.ActionLink($"{@cert.Engineer.EngineerName}", "Details", "Machines", new {id = cert.Engineer.EngineerId}) </li>
+      <li>@Html.ActionLink($"{@cert.Engineer.EngineerName}", "Details", "Engineers", new {id = cert.Engineer.EngineerId}) </li>
     }
 </ul>

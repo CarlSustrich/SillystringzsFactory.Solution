@@ -38,12 +38,40 @@ public class EngineersController : Controller
 
   public ActionResult Details(int id)
   {
-
     Engineer model = _db.Engineers
       .Include(thing=>thing.RepairCerts)
       .ThenInclude(thing=>thing.Machine)
       .FirstOrDefault(otherthing => (otherthing.EngineerId == id));
-      
     return View(model);
+  }
+
+  public ActionResult AddCert(int id)
+  {
+    ViewBag.Machines = _db.Machines.ToList();
+    return View(_db.Engineers.FirstOrDefault(peep=>peep.EngineerId == id));
+  }
+
+  [HttpPost]
+  public ActionResult AddCert(List<int> wutMachines, int engineerId)
+  {
+    if(wutMachines.Count == 0)
+    {
+      @ViewBag.Success = "No machines were selected";
+      ViewBag.Machines = _db.Machines.ToList();
+      return View(_db.Engineers.FirstOrDefault(peep=>peep.EngineerId == engineerId));
+    }
+    
+    foreach (int item in wutMachines)
+    {
+      #nullable enable
+      RepairCert? joinCheck = _db.RepairCerts.FirstOrDefault(genericPlaceHolderVariableName => (genericPlaceHolderVariableName.EngineerId == engineerId && genericPlaceHolderVariableName.MachineId == item));
+      #nullable disable
+      if(joinCheck == null && engineerId != 0)
+      {
+        _db.RepairCerts.Add(new RepairCert() {MachineId=item, EngineerId=engineerId});
+        _db.SaveChanges();
+      }
+    }
+    return RedirectToAction("Details", new {id = engineerId});
   }
 }
