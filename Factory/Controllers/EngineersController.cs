@@ -36,12 +36,13 @@ public class EngineersController : Controller
     {return RedirectToAction("Index");}
   }
 
-  public ActionResult Details(int engineerId)
+  public ActionResult Details(int id)
   {
+
     Engineer model = _db.Engineers
       .Include(thing=>thing.RepairCerts)
       .ThenInclude(thing=>thing.Machine)
-      .FirstOrDefault(thing => (thing.EngineerId == engineerId));
+      .FirstOrDefault(otherthing => (otherthing.EngineerId == id));
       
     return View(model);
   }

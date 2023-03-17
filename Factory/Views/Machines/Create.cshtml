@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Machine;
+
+<h1>Record a new Machine</h1>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model=>model.MachineName)
+  @Html.EditorFor(model=>model.MachineName)
+  <br>
+  @Html.LabelFor(model=>model.DateAcquired)
+  @Html.EditorFor(model=>model.DateAcquired)
+  <br>
+  @Html.Label("Add qualified engineers for this machine now?")
+  @Html.CheckBox("splashOrDetails", true)
+  <br>
+  <button>Save!</button>
+}

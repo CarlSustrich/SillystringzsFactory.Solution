@@ -7,7 +7,7 @@
 @foreach (Engineer item in Model)
 {
   @Html.ActionLink($"{item.EngineerName}", "Details", "Engineers", new {id = item.EngineerId})
-  <Br>
+  <hr>
 }
 
 @Html.ActionLink("Record a new engineer", "Create", "Engineers")
