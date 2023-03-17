@@ -44,4 +44,34 @@ public class MachinesController : Controller
       .FirstOrDefault(otherthing => (otherthing.MachineId == id));
     return View(model);
   }
+
+  public ActionResult AddCert(int id)
+  {
+    ViewBag.Engineers = _db.Engineers.ToList();
+    return View(_db.Machines.FirstOrDefault(peep=>peep.MachineId == id));
+  }
+
+  [HttpPost]
+  public ActionResult AddCert(List<int> wutEngineers, int machineId)
+  {
+    if(wutEngineers.Count == 0)
+    {
+      @ViewBag.Success = "No engineers were selected";
+      ViewBag.Engineers = _db.Engineers.ToList();
+      return View(_db.Machines.FirstOrDefault(peep=>peep.MachineId == machineId));
+    }
+    
+    foreach (int item in wutEngineers)
+    {
+      #nullable enable
+      RepairCert? joinCheck = _db.RepairCerts.FirstOrDefault(genericPlaceHolderVariableName => (genericPlaceHolderVariableName.MachineId == machineId && genericPlaceHolderVariableName.EngineerId == item));
+      #nullable disable
+      if(joinCheck == null && machineId != 0)
+      {
+        _db.RepairCerts.Add(new RepairCert() {MachineId=machineId, EngineerId=item});
+        _db.SaveChanges();
+      }
+    }
+    return RedirectToAction("Details", new {id = machineId});
+  }
 }

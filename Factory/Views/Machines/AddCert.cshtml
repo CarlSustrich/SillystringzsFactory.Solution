@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+@using Factory.Models;
+<h1 class="text-danger">@ViewBag.Success</h1>
+<h1>Add Qualified Engineers for @Model.MachineName</h1>
+<form method = "post">
+  <table class="table">
+    <tr>
+      <th>Engineer Name</th>
+      <th>Select</th>
+    </tr>
+    @foreach (Engineer item in ViewBag.Engineers)
+    {
+      <tr>
+        <td>@item.EngineerName</td>
+        <td><input name="wutEngineers" type="checkbox" value="@item.EngineerId"></td>
+      </tr>
+    }
+  </table>
+  <input type="hidden" value="@Model.MachineId" name="machineId" id="machineId">
+  <input type="submit" value="Add Qualified Engineers">
+</form>

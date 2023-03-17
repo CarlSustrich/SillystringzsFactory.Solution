@@ -13,3 +13,4 @@
       <li>@Html.ActionLink($"{@cert.Engineer.EngineerName}", "Details", "Engineers", new {id = cert.Engineer.EngineerId}) </li>
     }
 </ul>
+@Html.ActionLink("Record qualified Engineers for this machine", "AddCert", "Machines", new {id = Model.MachineId})
