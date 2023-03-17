@@ -2,18 +2,18 @@
   Layout = "_Layout";
 }
 @using Factory.Models;
-<h1 class="text-warn">@ViewBag.DeleteMessage</h1>
+<h1 class="text-warning">@ViewBag.Message</h1>
 <h1>Your available Engineers!</h1>
 <form method="post" action="/Engineers/MassDelete">
-<table>
-@foreach (Engineer item in Model)
-{
-  <tr>
-    <td>@Html.ActionLink($"{item.EngineerName}", "Details", "Engineers", new {id = item.EngineerId})</td>
-    <td><input type="checkbox" name="deleteWho" value="@item.EngineerId"></td>
-  </tr>
-}
-</table>
-<input type="submit", value="Delete the Selected Engineers">
+  <table>
+    @foreach (Engineer item in Model)
+    {
+      <tr>
+        <td>@Html.ActionLink($"{item.EngineerName}", "Details", "Engineers", new {id = item.EngineerId})</td>
+        <td><input type="checkbox" name="deleteWho" value="@item.EngineerId"></td>
+      </tr>
+    }
+  </table>
+  <input type="submit", value="Delete the Selected Engineers">
 </form>
 @Html.ActionLink("Record a new engineer", "Create", "Engineers")

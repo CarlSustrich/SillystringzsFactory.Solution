@@ -2,12 +2,18 @@
   Layout = "_Layout";
 }
 @using Factory.Models;
-
+<h1 class="text-warning">@ViewBag.Message</h1>
 <h1>Your available Machines!</h1>
-@foreach (Machine item in Model)
-{
-  @Html.ActionLink($"{item.MachineName}", "Details", "Machines", new {id = item.MachineId})
-  <hr>
-}
-
+<form method="post" action="/Machines/MassDelete">
+  <table>
+    @foreach (Machine item in Model)
+    {
+      <tr>
+        <td>@Html.ActionLink($"{item.MachineName}", "Details", "Machines", new {id = item.MachineId})</td>
+        <td><input type="checkbox" name="deleteWut" value="@item.MachineId"></td>
+      </tr>
+    }
+  </table>
+  <input type="submit", value="Delete the Selected Machines">
+</form>
 @Html.ActionLink("Record a new Machine", "Create", "Machines")

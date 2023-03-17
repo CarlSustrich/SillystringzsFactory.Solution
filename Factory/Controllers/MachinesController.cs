@@ -17,6 +17,11 @@ public class MachinesController : Controller
 
   public ActionResult Index()
   {
+    if (TempData["Message"] != null)
+    {
+      ViewBag.Message = TempData["Message"];
+      TempData.Remove("Message");
+    }
     return View(_db.Machines.Include(thing=>thing.RepairCerts).ThenInclude(thing=>thing.Engineer).ToList());
   }
 
@@ -73,5 +78,17 @@ public class MachinesController : Controller
       }
     }
     return RedirectToAction("Details", new {id = machineId});
+  }
+
+  [HttpPost]
+  public ActionResult MassDelete(List<int> deleteWut)
+  {
+    foreach(int item in deleteWut)
+    {
+      _db.Machines.Remove(_db.Machines.FirstOrDefault(person=>person.MachineId == item));
+      _db.SaveChanges();
+    }
+    TempData["Message"] = "Deleted the selected Machines";
+    return RedirectToAction("Index");
   }
 }

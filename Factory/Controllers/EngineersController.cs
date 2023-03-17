@@ -17,6 +17,11 @@ public class EngineersController : Controller
 
   public ActionResult Index()
   {
+    if (TempData["Message"] != null)
+    {
+      ViewBag.Message = TempData["Message"];
+      TempData.Remove("Message");
+    }
     return View(_db.Engineers.Include(thing=>thing.RepairCerts).ThenInclude(thing=>thing.Machine).ToList());
   }
 
@@ -83,7 +88,7 @@ public class EngineersController : Controller
       _db.Engineers.Remove(_db.Engineers.FirstOrDefault(person=>person.EngineerId == item));
       _db.SaveChanges();
     }
-    ViewBag.DeleteMessage = "Deleted the selected Engineers";
+    TempData["Message"] = "Deleted the selected Engineers";
     return RedirectToAction("Index");
   }
 }
