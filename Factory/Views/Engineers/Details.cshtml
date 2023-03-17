@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+@using Factory.Models;
+
+<h1>Engineer Details View</h1>
+<h4>@Model.EngineerName</h4>
+<h5>Hired on: @Model.DateOfHire.ToString("d")</h5>
+<ul>Certifications:
+    @foreach (RepairCert cert in Model.RepairCerts)
+    {
+      <li>@Html.ActionLink($"{@cert.Machine.MachineName}", "Details", "Machines", new {id = cert.Machine.MachineId}) </li>
+    }
+</ul>
