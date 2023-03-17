@@ -6,9 +6,11 @@
 <h1>Record a new Machine</h1>
 @using (Html.BeginForm())
 {
+  @Html.ValidationMessageFor(model => model.MachineName, "", new { @class = "text-danger", @style = "font-weight: 600;" })
   @Html.LabelFor(model=>model.MachineName)
   @Html.EditorFor(model=>model.MachineName)
   <br>
+  @Html.ValidationMessageFor(model => model.DateAcquired, "", new { @class = "text-danger", @style = "font-weight: 600;" })
   @Html.LabelFor(model=>model.DateAcquired)
   @Html.EditorFor(model=>model.DateAcquired)
   <br>

@@ -6,9 +6,11 @@
 <h1>Record a new Engineer</h1>
 @using (Html.BeginForm())
 {
+  @Html.ValidationMessageFor(model => model.EngineerName, "", new { @class = "text-danger", @style = "font-weight: 600;" })
   @Html.LabelFor(model=>model.EngineerName)
   @Html.EditorFor(model=>model.EngineerName)
   <br>
+  @Html.ValidationMessageFor(model => model.DateOfHire, "", new { @class = "text-danger", @style = "font-weight: 600;" })
   @Html.LabelFor(model=>model.DateOfHire)
   @Html.EditorFor(model=>model.DateOfHire)
   <br>

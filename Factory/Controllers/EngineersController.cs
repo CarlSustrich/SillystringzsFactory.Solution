@@ -33,6 +33,7 @@ public class EngineersController : Controller
   [HttpPost]
   public ActionResult Create(Engineer newEngineer, bool splashOrDetails)
   {
+    if(!ModelState.IsValid) {return View();}
     _db.Engineers.Add(newEngineer);
     _db.SaveChanges();
     if(splashOrDetails)

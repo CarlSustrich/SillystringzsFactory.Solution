@@ -18,6 +18,11 @@ public class HomeController : Controller
   [HttpGet("/")]
   public ActionResult Index() 
   {
+    if (TempData["Message"] != null)
+    {
+      ViewBag.Message = TempData["Message"];
+      TempData.Remove("Message");
+    }
     ViewBag.Engineers = _db.Engineers.ToList();
     ViewBag.Machines = _db.Machines.ToList();
     return View();

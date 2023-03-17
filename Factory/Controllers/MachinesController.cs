@@ -33,6 +33,7 @@ public class MachinesController : Controller
   [HttpPost]
   public ActionResult Create(Machine newMachine, bool splashOrDetails)
   {
+    if(!ModelState.IsValid) {return View();}
     _db.Machines.Add(newMachine);
     _db.SaveChanges();
     if(splashOrDetails)

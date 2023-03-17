@@ -1,7 +1,7 @@
 @{
   Layout = "_Layout";
 }
-
+<h1 class="text-warning">@ViewBag.Message</h1>
 <h1>Welcome to your Engineer Managment Interface</h1>
 
 <div class="container">
@@ -9,7 +9,7 @@
     <div class="col">Engineers</div>
     <div class="col">Machines</div>
   </div>
-  @for(int i=0; i<ViewBag.Engineers.Count && i<ViewBag.Machines.Count; i++)
+  @for(int i=0; i<Math.Max(ViewBag.Engineers.Count, ViewBag.Machines.Count); i++)
   {
     <div class="row">
       @if(i<ViewBag.Engineers.Count)
