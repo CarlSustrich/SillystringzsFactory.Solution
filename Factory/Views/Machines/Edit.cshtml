@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Machine
+
+<h1>Edit @Model.MachineName's Info</h1>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model=>model.MachineId)
+  @Html.Label("Machine Name")
+  @Html.EditorFor(model=>model.MachineName, new {value=Model.MachineName})
+  <br>
+  @Html.Label("Date Acquired")
+  @Html.EditorFor(model=>model.DateAcquired, new {value = Model.DateAcquired})
+  <br>
+  <button>Save!</button>
+}

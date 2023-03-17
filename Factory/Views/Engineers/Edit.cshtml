@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Engineer
+
+<h1>Edit @Model.EngineerName's Info</h1>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model=>model.EngineerId)
+  @Html.Label("Engineer Name")
+  @Html.EditorFor(model=>model.EngineerName, new {value=Model.EngineerName})
+  <br>
+  @Html.Label("Date Hired")
+  @Html.EditorFor(model=>model.DateOfHire, new {value = Model.DateOfHire})
+  <br>
+  <button>Save!</button>
+}

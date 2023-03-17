@@ -91,4 +91,18 @@ public class MachinesController : Controller
     TempData["Message"] = "Deleted the selected Machines";
     return RedirectToAction("Index");
   }
+
+  public ActionResult Edit(int id)
+  {
+    return View(_db.Machines.FirstOrDefault(thing=>thing.MachineId == id));
+  }
+
+  [HttpPost]
+  public ActionResult Edit(Machine updatedMachine)
+  {
+    _db.Machines.Update(updatedMachine);
+    _db.SaveChanges();
+    TempData["Message"] = "Machine's Info Updated";
+    return RedirectToAction("Index");
+  }
 }

@@ -91,4 +91,18 @@ public class EngineersController : Controller
     TempData["Message"] = "Deleted the selected Engineers";
     return RedirectToAction("Index");
   }
+
+  public ActionResult Edit(int id)
+  {
+    return View(_db.Engineers.FirstOrDefault(thing=>thing.EngineerId == id));
+  }
+
+  [HttpPost]
+  public ActionResult Edit(Engineer updatedEngineer)
+  {
+    _db.Engineers.Update(updatedEngineer);
+    _db.SaveChanges();
+    TempData["Message"] = "Engineer's Info Updated";
+    return RedirectToAction("Index");
+  }
 }
