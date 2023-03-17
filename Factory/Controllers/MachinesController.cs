@@ -31,7 +31,7 @@ public class MachinesController : Controller
     _db.Machines.Add(newMachine);
     _db.SaveChanges();
     if(splashOrDetails)
-    {return RedirectToAction("Details", new {id = newMachine.MachineId});}
+    {return RedirectToAction("AddCert", new {id = newMachine.MachineId});}
     else
     {return RedirectToAction("Index");}
   }

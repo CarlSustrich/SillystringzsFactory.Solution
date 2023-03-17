@@ -31,7 +31,7 @@ public class EngineersController : Controller
     _db.Engineers.Add(newEngineer);
     _db.SaveChanges();
     if(splashOrDetails)
-    {return RedirectToAction("Details", new {id = newEngineer.EngineerId});}
+    {return RedirectToAction("AddCert", new {id = newEngineer.EngineerId});}
     else
     {return RedirectToAction("Index");}
   }
