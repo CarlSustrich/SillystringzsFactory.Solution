@@ -74,4 +74,16 @@ public class EngineersController : Controller
     }
     return RedirectToAction("Details", new {id = engineerId});
   }
+
+  [HttpPost]
+  public ActionResult MassDelete(List<int> deleteWho)
+  {
+    foreach(int item in deleteWho)
+    {
+      _db.Engineers.Remove(_db.Engineers.FirstOrDefault(person=>person.EngineerId == item));
+      _db.SaveChanges();
+    }
+    ViewBag.DeleteMessage = "Deleted the selected Engineers";
+    return RedirectToAction("Index");
+  }
 }

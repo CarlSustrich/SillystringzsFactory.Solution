@@ -14,12 +14,12 @@
     <div class="row">
       @if(i<ViewBag.Engineers.Count)
       {
-        <div class="col">@Html.ActionLink($"{ViewBag.Engineers[i].EngineerName}", "Details", "Engineers")</div>
+        <div class="col">@Html.ActionLink($"{ViewBag.Engineers[i].EngineerName}", "Details", "Engineers", new {id = ViewBag.Engineers[i].EngineerId})</div>
       }
       else{<div class="col">-</div>}
       @if(i<ViewBag.Machines.Count)
       {
-        <div class="col">@Html.ActionLink($"{ViewBag.Machines[i].MachineName}", "Details", "Machines")</div>
+        <div class="col">@Html.ActionLink($"{ViewBag.Machines[i].MachineName}", "Details", "Machines", new {id = ViewBag.Machines[i].MachineId})</div>
       }
       else{<div class="col">-</div>}
     </div>
