@@ -2,4 +2,26 @@
   Layout = "_Layout";
 }
 
-<h1>Splishy Splashy</h1>
+<h1>Welcome to your Engineer Managment Interface</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col">Engineers</div>
+    <div class="col">Machines</div>
+  </div>
+  @for(int i=0; i<ViewBag.Engineers.Count && i<ViewBag.Machines.Count; i++)
+  {
+    <div class="row">
+      @if(i<ViewBag.Engineers.Count)
+      {
+        <div class="col">@Html.ActionLink($"{ViewBag.Engineers[i].EngineerName}", "Details", "Engineers")</div>
+      }
+      else{<div class="col">-</div>}
+      @if(i<ViewBag.Machines.Count)
+      {
+        <div class="col">@Html.ActionLink($"{ViewBag.Machines[i].MachineName}", "Details", "Machines")</div>
+      }
+      else{<div class="col">-</div>}
+    </div>
+  }
+</div>
