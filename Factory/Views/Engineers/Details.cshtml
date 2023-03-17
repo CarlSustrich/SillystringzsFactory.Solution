@@ -7,12 +7,22 @@
 <h4>@Model.EngineerName</h4>
 <h5>Hired on: @Model.DateOfHire.ToString("d")</h5>
 <h5>Certifications:</h5>
-<ul>
-    @foreach (RepairCert cert in Model.RepairCerts)
-    {
-      <li>@Html.ActionLink($"{@cert.Machine.MachineName}", "Details", "Machines", new {id = cert.Machine.MachineId}) </li>
-    }
-</ul>
+@if(Model.RepairCerts.Count != 0)
+{
+  <form method="post" action="/RepairCerts/Delete">
+    <table>
+      @foreach (RepairCert cert in Model.RepairCerts)
+      {
+        <tr>
+          <td>*</td>
+          <td>@Html.ActionLink($"{@cert.Machine.MachineName}", "Details", "Machines", new {id = cert.Machine.MachineId})</td>
+          <td><input type="checkbox" name="deleteWhich" value="@cert.RepairCertId"></td>
+        </tr>
+      }
+    </table>
+    <input type="submit" value="Remove the Selected Repair Qualifications">
+  </form>
+}
 @Html.ActionLink("Record Qualifications for this Engineer", "AddCert", "Engineers", new {id = Model.EngineerId})
 <br>
 @Html.ActionLink("Update this Engineer's info", "Edit", "Engineers", new {id = Model.EngineerId})
